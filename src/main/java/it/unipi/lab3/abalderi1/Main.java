@@ -107,7 +107,7 @@ public class Main {
                 System.out.println();
 
                 switch (input) {
-                    case 1:
+                    case 1 -> {
                         System.out.print("Inserisci l'username: ");
                         String username = scanner.nextLine();
 
@@ -120,7 +120,6 @@ public class Main {
                                 "registration?username=" + username + ",password=" + password
                         );
 
-
                         if (response.get("status").getAsString().equals("200")) {
                             user = gson.fromJson(response.get("body").getAsString(), User.class);
 
@@ -131,14 +130,13 @@ public class Main {
 
                             System.out.println("ERRORE: " + bodyObject.get("message").getAsString());
                         }
-                        break;
-                    case 2:
-                        // implement login
+                    }
+                    case 2 -> {
                         System.out.print("Inserisci l'username: ");
-                        username = scanner.nextLine();
+                        String username = scanner.nextLine();
 
                         System.out.print("Inserisci la password: ");
-                        password = readPassword();
+                        String password = readPassword();
 
                         response = runCommandAndReturnResponseAsJson(
                                 outputStreamWriter,
@@ -156,10 +154,8 @@ public class Main {
 
                             System.out.println("ERRORE: " + bodyObject.get("message").getAsString());
                         }
-                        break;
-                    default:
-                        System.out.println("Input non valido.");
-                        break;
+                    }
+                    default -> System.out.println("Input non valido.");
                 }
 
                 System.out.println();
@@ -173,7 +169,7 @@ public class Main {
             );
 
 
-            if(response.get("status").getAsString().equals("FALSE")) {
+            if (response.get("status").getAsString().equals("FALSE")) {
                 System.out.println("\nCosa vuoi fare?");
                 System.out.println("1. Inizia partita");
                 System.out.println("2. Mostra statistiche");
@@ -183,7 +179,7 @@ public class Main {
                 input = getIntegerInput(scanner, 1, 4);
 
                 switch (input) {
-                    case 1:
+                    case 1 -> {
                         // implement play
                         response = runCommandAndReturnResponseAsJson(
                                 outputStreamWriter,
@@ -199,8 +195,8 @@ public class Main {
 
                             System.out.println("\nERRORE: " + bodyObject.get("message").getAsString());
                         }
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         // implement statistic
                         response = runCommandAndReturnResponseAsJson(
                                 outputStreamWriter,
@@ -217,8 +213,8 @@ public class Main {
 
                             System.out.println("\nERRORE: " + bodyObject.get("message").getAsString());
                         }
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         // implement share
                         response = runCommandAndReturnResponseAsJson(
                                 outputStreamWriter,
@@ -234,14 +230,15 @@ public class Main {
 
                             System.out.println("\nERRORE: " + bodyObject.get("message").getAsString());
                         }
-                        break;
+                    }
                 }
-            }
-            else {
+            } else {
                 System.out.println("\nCosa vuoi fare?");
 
                 System.out.println("1. Invia parola");
                 System.out.println("2. Mostra statistiche");
+
+
             }
 
 
